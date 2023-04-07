@@ -152,23 +152,25 @@
 
     // Edit button functionality
     function editTask(currElement) {
-        console.lo("hello")
-      // let newInput =  document.createElement('input')
-      // newInput.type = "text"
-      // newInput.className = 'form-control'
-      // newInput.placeholder =  curElement.parentElement[0].textContent
-      // newInput.textContent = curElement.parentElement[0].textContent;
-      // curElement.parentElement.replaceChild(newInput, curElement.previousElementSibling)
-      let curInput = currElement.previousElementSibling.textContent;
+      console.log(currElement);
       let newInput = document.createElement("input");
       newInput.type = "text";
-      newInput.placeholder = "Add a Task";
       newInput.className = "form-control";
-      newInput.value = curInput;
-      currElement.parentElement.replaceChild(
-        curInput,
-        currElement.previousElementSibling
-      );
+      newInput.placeholder = currElement.parentElement.children[0].textContent;
+      newInput.value = currElement.parentElement.children[0].textContent;
+      currElement.parentElement.children[0].replaceWith(newInput);
+      currElement.textContent = "Save";
+      currElement.className = "btn btn-outline-success";
+      currElement.setAttribute("onclick", "saveTask(this)");
+    }
+    // Save button functionality
+    function saveTask(element) {
+      let newInput = document.createElement("h3");
+      newInput.textContent = element.parentElement.children[0].value;
+      element.parentElement.children[0].replaceWith(newInput);
+      element.textContent = "Edit";
+      element.className = "btn btn-outline-warning";
+      element.setAttribute("onclick", "editTask(this)");
     }
   </script>
 </html>
